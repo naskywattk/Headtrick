@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>@NASKYWA |MELHOR AUXILIO 🍓</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .login-form {
+      width: 300px;
+      margin: 120px auto;
+      padding: 20px;
+      background: #000000d0;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px #ff000055;
+    }
+    .login-form input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: none;
+      background: #222;
+      color: white;
+    }
+    .login-btn {
+      background: #ff0000;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .login-btn:hover {
+      background: #cc0000;
+    }
+    .login-section {
+      display: none;
+    }
+    .container {
+      width: 90%;
+      max-width: 400px;
+      margin: 100px auto;
+      background: linear-gradient(to bottom, #5a0000, #000);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px #ff000080;
+    }
+    h2 {
+      text-align: center;
+      color: #ff4c4c;
+      margin-bottom: 20px;
+    }
+    .welcome-message {
+      text-align: center;
+      color: #00ff88;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .menu-item {
+      background: #ff0000;
+      color: white;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-item::before {
+      content: '►';
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+    .menu-item.open::before {
+      transform: rotate(90deg);
+    }
+    .sub-options {
+      display: none;
+      padding-left: 15px;
+      margin-top: 5px;
+    }
+    .checkbox-label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .checkbox-label input {
+      margin-right: 8px;
+      accent-color: #ff0000;
+    }
+    .command-prompt {
+      margin-top: 15px;
+      background: #1a1a1a;
+      border: 1px solid #ff0000;
+      border-radius: 6px;
+      padding: 10px;
+      max-height: 100px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .insta-icon {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      background: #fff;
+      border-radius: 50%;
+      padding: 12px;
+      box-shadow: 0 0 10px #ff0000;
+    }
+    .insta-icon img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="login-form" id="login-form">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário" />
+    <input type="password" id="password" placeholder="Senha" />
+    <button class="login-btn" onclick="validateLogin()">Entrar</button>
+    <button class="login-btn" onclick="window.open('https://www.instagram.com/relixstore._?igsh=cHZoazZhZ2d3bWVi', '_blank')">Discod</button>
+    <p id="login-error" style="color:red; display:none;">Login inválido</p>
+  </div>
+
+  <div class="login-section" id="painel-relix">
+    <div class="container">
+      <div class="welcome-message">🎉 Bem-vindo ao Painel Auxílio Free @Relix Store 🎉</div>
+      <h2>@RELIX STORE</h2>
+
+      <!-- AUXÍLIO + TRICK -->
+      <div class="menu-item" onclick="toggleOptions(this, 'main-assist')">Auxílio & Trick</div>
+      <div class="sub-options" id="main-assist">
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'TrickHead')">TrickHead</label>
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AimFOV')">AimFOV</label>
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'RecuoLite')">Recuo Lite</label>
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AimNeck')">AimNeck</label>
+      </div>
+
+      <!-- LITE -->
+      <div class="menu-item" onclick="toggleOptions(this, 'tricks-lite')">Tricks Lite</div>
+      <div class="sub-options" id="tricks-lite">
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'TrickSnapLite')">TrickSnap Lite</label>
+      </div>
+
+      <!-- LOCK -->
+      <div class="menu-item" onclick="toggleOptions(this, 'lock-functions')">Lock Functions</div>
+      <div class="sub-options" id="lock-functions">
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AimLock')">AimLock</label>
+      </div>
+
+      <div class="command-prompt" id="commandPrompt"></div>
+    </div>
+  </div>
+
+  <a href="https://www.instagram.com/relixstore._?igsh=cHZoazZhZ2d3bWVi" target="_blank" class="insta-icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+  </a>
+
+  <script>
+    const loopTimers = {};
+
+    function validateLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const error = document.getElementById('login-error');
+      if (user === 'relixfree' && pass === '00') {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('painel-relix').style.display = 'block';
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    function toggleOptions(el, id) {
+      const section = document.getElementById(id);
+      const open = section.style.display === 'block';
+      section.style.display = open ? 'none' : 'block';
+      el.classList.toggle('open', !open);
+    }
+
+    function updatePrompt(checkbox, modName) {
+      const prompt = document.getElementById('commandPrompt');
+      const status = checkbox.checked ? 'Ativado' : 'Desativado';
+      const color = checkbox.checked ? 'lightgreen' : 'lightcoral';
+      prompt.innerHTML += `<span style='color:${color}'>${modName} ${status}</span><br>`;
+      prompt.scrollTop = prompt.scrollHeight;
+      checkbox.checked ? startLoop(modName) : stopLoop(modName);
+    }
+
+    function startLoop(modName) {
+      if (loopTimers[modName]) return;
+      loopTimers[modName] = setInterval(() => {
+        if (modName === 'TrickHead') trickhead();
+        else if (modName === 'AimFOV') aimfov();
+        else if (modName === 'TrickSnapLite') trickSnapLite();
+        else if (modName === 'RecuoLite') recuoLite();
+        else if (modName === 'AimLock') aimLock();
+        else if (modName === 'AimNeck') aimNeck();
+      }, 1000);
+    }
+
+    function stopLoop(modName) {
+      clearInterval(loopTimers[modName]);
+      delete loopTimers[modName];
+    }
+
+    function trickhead() {
+      let miraY = 200, headY = 100, velocidade = 0.15;
+      let passos = 0;
+      let loop = setInterval(() => {
+        if (passos >= 8) return clearInterval(loop);
+        let ajuste = (headY - miraY) * velocidade;
+        miraY += ajuste;
+        passos++;
+      }, 150);
+    }
+
+    function aimfov() {
+      let miraX = 100, miraY = 100, inimigoX = 130, inimigoY = 85;
+      let vel = 0.1;
+      let passos = 0;
+      let loop = setInterval(() => {
+        if (passos >= 10) return clearInterval(loop);
+        miraX += (inimigoX - miraX) * vel;
+        miraY += (inimigoY - miraY) * vel;
+        passos++;
+      }, 120);
+    }
+
+    function trickSnapLite() {
+      let miraX = 120, miraY = 150, alvoX = 110, alvoY = 100;
+      miraX = (miraX + alvoX) / 2;
+      miraY = (miraY + alvoY) / 2;
+    }
+
+    function recuoLite() {
+      let recuo = 0, intensidade = 0.6;
+      let passos = 0;
+      let loop = setInterval(() => {
+        if (passos >= 8) return clearInterval(loop);
+        recuo += intensidade;
+        passos++;
+      }, 100);
+    }
+
+    function aimLock() {
+      let miraX = 100, miraY = 100;
+      let alvoX = 102, alvoY = 99;
+      let força = 0.4;
+      let passos = 0;
+      let loop = setInterval(() => {
+        if (passos >= 8) return clearInterval(loop);
+        miraX += (alvoX - miraX) * força;
+        miraY += (alvoY - miraY) * força;
+        passos++;
+      }, 90);
+    }
+
+    function aimNeck() {
+      let miraY = 180;
+      let pescoçoY = 130;
+      let velocidade = 0.25;
+      let passos = 0;
+      let loop = setInterval(() => {
+        if (passos >= 6) return clearInterval(loop);
+        let ajuste = (pescoçoY - miraY) * velocidade;
+        miraY += ajuste;
+        passos++;
+      }, 100);
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff0000" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 120,
+          color: "#ff0000",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 3,
+          direction: "none",
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 200 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>
